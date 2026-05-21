@@ -1,10 +1,13 @@
 class Field:
-    def __init__(self, width, height, gravity=-9.81, dt=1 / 60):
+    def __init__(self, width, height, dt=1 / 60):
         self.width = width
         self.height = height
-        self.gravity = gravity  # default: -9.81
         self.bodies = []  # Object list
+        self.gravity = 0.0
         self.dt = dt
+
+    def set_gravity(self, gravity=-9.81):
+        self.gravity = gravity  # default: -9.81
 
     def add_body(self, body):
         self.bodies.append(body)
