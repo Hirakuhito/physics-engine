@@ -1,7 +1,6 @@
 from field import Field
 from visual import Visualizer
 import matplotlib.animation as animation
-import matplotlib.pyplot as plt
 from dataclasses import dataclass
 from typing import Optional
 
@@ -24,9 +23,16 @@ class Engine:
         self.config = config or EngineConfig()
 
     def run(self):
-        anim = animation.FuncAnimation(self.visualizer.fig, self._update, interval=10)
-        plt.show()
+        self.anim = animation.FuncAnimation(
+            self.visualizer.fig,
+            self._update,
+            interval=16,
+            blit=False,
+            cache_frame_data=False,
+        )
+        self.visualizer.show()
 
-    def _update(self, frame):
+    def _update(self, _) -> None:
+        print("Update")
         self.field.step(method=self.config.method)
         self.visualizer.update(self.field)

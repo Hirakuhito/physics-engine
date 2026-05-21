@@ -1,6 +1,3 @@
-from rigid_body import RigidBody
-
-
 class Field:
     def __init__(self, width, height, dt=1 / 60):
         self.width = width

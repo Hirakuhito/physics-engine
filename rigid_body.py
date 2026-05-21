@@ -1,5 +1,5 @@
 class RigidBody:
-    def __init__(self, x, y, m):
+    def __init__(self, x: float, y: float, m: float):
         # Posision (x, y)
         self.x = x  # m
         self.y = y  # m

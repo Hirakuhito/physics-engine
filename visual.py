@@ -6,10 +6,10 @@ from functools import partial
 
 
 class Visualizer:
-    def __init__(self, field: Field, origin: Literal["tc", "cc", "bc", "bl"] = "cc"):
+    def __init__(self, width, height, origin: Literal["tc", "cc", "bc", "bl"] = "cc"):
         # Figure Size
-        self.width = field.width
-        self.height = field.height
+        self.width = width
+        self.height = height
         self.origin = origin
 
         self.fig = plt.figure()
@@ -55,8 +55,12 @@ class Visualizer:
         self.ax.set_aspect("equal")
         self._set_origin(self.origin)
 
-    def show_image(self):
-        print("This is test message")
+    def show(self):
+        plt.show()
 
     def update(self, field: Field):
-        pass
+        for artist in self.ax.lines:
+            artist.remove()
+
+        for body in field.bodies:
+            self.ax.plot(body.x, body.y, "o", markersize=8)
