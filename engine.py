@@ -1,30 +1,32 @@
+from field import Field
+from visual import Visualizer
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class EngineConfig:
+    max_steps: int = 1000
+    method: str = "symplectic"
+
+
 class Engine:
-    def __init__(self):
-        pass
+    def __init__(
+        self,
+        field: Field,
+        visualizer: Visualizer,
+        config: Optional[EngineConfig] = None,
+    ):
+        self.field = field
+        self.visualizer = visualizer
+        self.config = config or EngineConfig()
 
-    def run_simulation(self, method, step=600, dt=1 / 60):
-        world = World(800, 600, dt=dt)
-        body = RigidBody(400, 300, 1.0)
-        world.add_body(body)
-        body.apply_force(0, 10)
+    def run(self):
+        anim = animation.FuncAnimation(self.visualizer.fig, self._update, interval=10)
+        plt.show()
 
-        energy = []
-        for _ in range(step):
-            world.step(method)
-            energy.append(body.energy(world.gravity))
-
-        return energy
-
-
-def main():
-    e_euler = run_simulation("euler")
-    e_symplectic = run_simulation("symplectic")
-
-    # plt.figure(figsize=(800, 600), layout='constrained')
-    plt.plot(e_euler, label="euler")
-    plt.plot(e_symplectic, label="symplectic")
-    plt.axhline(e_euler[0], color="gray", linestyle="--", label="Primary Energy")
-    plt.xlabel("Steps")
-    plt.ylabel("Hole Energy (J)")
-    plt.legend()
-    plt.show()
+    def _update(self, frame):
+        self.field.step(method=self.config.method)
+        self.visualizer.update(self.field)
