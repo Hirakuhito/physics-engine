@@ -26,13 +26,12 @@ class Engine:
         self.anim = animation.FuncAnimation(
             self.visualizer.fig,
             self._update,
-            interval=16,
+            interval=1,
             blit=False,
             cache_frame_data=False,
         )
         self.visualizer.show()
 
-    def _update(self, _) -> None:
-        print("Update")
+    def _update(self, _):
         self.field.step(method=self.config.method)
         self.visualizer.update(self.field)

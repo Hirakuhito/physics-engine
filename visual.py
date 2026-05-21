@@ -63,4 +63,4 @@ class Visualizer:
             artist.remove()
 
         for body in field.bodies:
-            self.ax.plot(body.x, body.y, "o", markersize=8)
+            self.ax.plot(body.x, body.y, "o", color="indigo", markersize=10)
