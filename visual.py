@@ -1,8 +1,11 @@
+import matplotlib
+
+matplotlib.use("QtAgg")
+
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+
 from field import Field
 from typing import Literal
-from functools import partial
 
 
 class Visualizer:

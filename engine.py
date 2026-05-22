@@ -1,6 +1,11 @@
+import matplotlib
+
+matplotlib.use("QtAgg")
+
+
+import matplotlib.animation as animation
 from field import Field
 from visual import Visualizer
-import matplotlib.animation as animation
 from dataclasses import dataclass
 from typing import Optional
 

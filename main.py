@@ -1,17 +1,16 @@
-import matplotlib
-
-matplotlib.use("QtAgg")
-
-
 from engine import Engine
 from field import Field
 from rigid_body import RigidBody
 from visual import Visualizer
+from rich.table import Table
+from rich.console import Console
 
 
 def show_status():
-    print("CONFIGURATION")
-    print(matplotlib.get_backend())
+    console = Console()
+    table = Table(title="CONFIGURATION")
+
+    console.print(table)
 
 
 def main():
