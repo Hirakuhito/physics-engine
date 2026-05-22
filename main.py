@@ -2,14 +2,15 @@ import matplotlib
 
 matplotlib.use("QtAgg")
 
-from field import Field
+
 from engine import Engine
-from visual import Visualizer
+from field import Field
 from rigid_body import RigidBody
+from visual import Visualizer
 
 
 def show_status():
-    print("STATUS")
+    print("CONFIGURATION")
     print(matplotlib.get_backend())
 
 
